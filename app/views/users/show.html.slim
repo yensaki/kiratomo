@@ -1,4 +1,10 @@
 h1 #{@user.name} さんのマイキャラ
 
-- @user.mycharas.each do |mychara|
-  h2 = "✨⭐ #{mychara.name} ⭐✨"
+.container
+  .row
+    - @user.images.each do |image|
+      .card
+        = image_tag image.file.variant(resize: "200x200"), class: 'card-img-top'
+
+  - @user.mycharas.each do |mychara|
+    h2 = "✨⭐ #{mychara.name} ⭐✨"

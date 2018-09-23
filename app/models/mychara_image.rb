@@ -1,0 +1,2 @@
+class MycharaImage < ApplicationRecord
+end

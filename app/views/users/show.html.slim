@@ -1,10 +1,18 @@
 h1 #{@user.name} さんのマイキャラ
 
 .container
-  .row
-    - @user.images.each do |image|
-      .card
-        = image_tag image.file.variant(resize: "200x200"), class: 'card-img-top'
+  - if @user.images.present?
+    .row
+      - @user.images.each do |image|
+        - next if image.mychara
+        .card
+          = image_tag image.file.variant(resize: "200x200"), class: 'card-img-top'
+    = link_to '画像一覧', user_images_path(@user)
 
   - @user.mycharas.each do |mychara|
-    h2 = "✨⭐ #{mychara.name} ⭐✨"
+    .container
+      h2 = "✨⭐ #{mychara.name} ⭐✨"
+      .row
+        - mychara.images.each do |image|
+          .card
+            = image_tag image.file.variant(resize: "200x200"), class: 'card-img-top'

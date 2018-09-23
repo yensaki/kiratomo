@@ -1,0 +1,2 @@
+module MycharaImagesHelper
+end

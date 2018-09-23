@@ -1,8 +1,16 @@
 .container
   .row
+    - mycharas = @user.mycharas.to_a
+    - collection = mycharas.map { |mychara| [ mychara.name, mychara.id ] }
     - @user.images.each do |image|
       .card
         = image_tag image.file.variant(resize: "200x200"), class: 'card-img-top'
+        .card-body
+          = form_with model: MycharaImage.new(image: image) do |f|
+            = f.hidden_field :image_id
+            = f.select :mychara_id, collection, { include_blank: true }
+            br
+            = f.submit 'マイキャラ登録'
 
   - if current_user == @user
     = form_with(model: @user.images.build, url: user_images_path(user_id: current_user.id)) do |f|

@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   resources :users do
     resources :images, controller: 'users/images'
   end
+  resources :mychara_images
+
 end
